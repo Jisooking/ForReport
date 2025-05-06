@@ -12,6 +12,12 @@
 /[Uu]ser[Ss]ettings/
 *.log
 
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+Packages/com.unity.*
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
