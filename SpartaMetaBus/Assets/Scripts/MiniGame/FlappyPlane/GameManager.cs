@@ -32,8 +32,11 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        Debug.Log("Game Over");              
-        ScoreManager.instance.bestScore = currentScore;
+        Debug.Log("Game Over");
+        if (ScoreManager.instance.bestScore < currentScore)
+        {
+            ScoreManager.instance.bestScore = currentScore;
+        }        
         ScoreManager.instance.UpdateScoreUI();
         ScoreManager.instance.IsSucess();
         uiManager.ReturnMainScene();

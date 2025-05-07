@@ -48,13 +48,16 @@ public class ScoreManager : MonoBehaviour
 
     public void IsSucess()
     {
-        if (bestScore < 10 && bestScore > 0)
+        if (bestScore != 0)
         {
-            isSucess.text = "Fail..";
-        }
-        else if (bestScore > 10)
-        {
-            isSucess.text = "Sucess!!";
+            if (bestScore < 10 && bestScore > 0)
+            {
+                isSucess.text = "Fail..";
+            }
+            else if (bestScore > 10)
+            {
+                isSucess.text = "Sucess!!";
+            }
         }
         else
         {

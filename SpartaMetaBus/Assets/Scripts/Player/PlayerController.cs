@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        if (isJumping) { return; }
+        //if (isJumping) { return; }
         moveInput = value.Get<Vector2>();
 
         if (moveInput.x < 0)
