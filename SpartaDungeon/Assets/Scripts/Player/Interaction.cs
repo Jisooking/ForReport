@@ -58,10 +58,16 @@ public class Interaction : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Started && curInteractable != null)
         {
-            curInteractable.OnInteract();
+            if (curInteractGameObject.layer == LayerMask.NameToLayer("Interactable"))
+            {
+                curInteractable.OnInteract();
+            }
             curInteractGameObject = null;
             curInteractable = null;
-            promptText.gameObject.SetActive(false);
+            if (promptText != null)
+            {
+                promptText.gameObject.SetActive(false);
+            }
         }
     }
 }

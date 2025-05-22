@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c7d73c2b09fc3499e86170534d181b, type: 3}
+  m_Name: Item_JumpPad
+  m_EditorClassIdentifier: 
+  displayName: "\uC810\uD504\uB300"
+  description: "\uBB54\uAC00 \uC5C4\uCCAD\uB09C \uD798\uC774 \uB290\uAEF4\uC9C4\uB2E4"
+  type: 0
+  icon: {fileID: 0}
+  dropPrefab: {fileID: 8695903056903347989, guid: 6d1466667ce09e54698a3a49666cb339, type: 3}
+  canStack: 0
+  maxStackAmount: 0
+  consumables: []
