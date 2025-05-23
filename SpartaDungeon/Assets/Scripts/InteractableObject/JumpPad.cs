@@ -3,7 +3,7 @@ using UnityEngine;
 public class JumpPad : MonoBehaviour
 {
     public float launchForce = 200f; // 튀어오르는 힘
-    public Vector3 launchDirection = Vector3.up; // 위쪽 방향
+    public Vector3 launchDirection = Vector3.up; // 방향
 
     private void OnTriggerEnter(Collider other)
     {

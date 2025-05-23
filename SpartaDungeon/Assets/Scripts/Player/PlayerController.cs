@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;   // 커서 이동 잠금처리
     }
 
     private void FixedUpdate()
@@ -50,18 +50,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnLookInput(InputAction.CallbackContext context)
+    public void OnLookInput(InputAction.CallbackContext context)    // 카메라 시점변경
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
 
-    public void OnMoveInput(InputAction.CallbackContext context)
+    public void OnMoveInput(InputAction.CallbackContext context)    // 플레이어 이동처리
     {
         if(context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
         }
-        else if(context.phase == InputActionPhase.Canceled)
+        else if(context.phase == InputActionPhase.Canceled) // 키 입력 off시 멈춤 처리
         {
             curMovementInput = Vector2.zero;
         }
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded())
+        if(context.phase == InputActionPhase.Started && IsGrounded())   // 중복 점프 방지
         {
             rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
         }
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        Ray[] rays = new Ray[4]
+        Ray[] rays = new Ray[4] // 3D 공간에서의 Ray발사
         {
             new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
             new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 1.25f, groundLayerMask))
+            if (Physics.Raycast(rays[i], 1.25f, groundLayerMask))   // 바닥 레이어 체크
             {
                 return true;
             }
@@ -123,14 +123,14 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void ToggleCursor()
+    void ToggleCursor() // 인벤토리 키 활성화 시 발생이벤트 마우스 커서 잠금상태처리
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
     }
     
-    public void BoostSpeed(float amount, float duration)
+    public void BoostSpeed(float amount, float duration)    // 이동 속도 증가 이벤트
     {
         StartCoroutine(SpeedBoostCoroutine(amount, duration));
     }

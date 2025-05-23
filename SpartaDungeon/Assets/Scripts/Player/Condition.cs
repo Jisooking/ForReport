@@ -16,7 +16,7 @@ public class Condition : MonoBehaviour
 
     private void Update()
     {
-        uiBar.fillAmount = GetPercentage();
+        uiBar.fillAmount = GetPercentage(); // 스테이터스 바 UI표시
     }
 
     public void Add(float amount)

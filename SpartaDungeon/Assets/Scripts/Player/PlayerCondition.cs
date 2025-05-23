@@ -25,15 +25,15 @@ public class PlayerCondition : MonoBehaviour
 
     private void Update()
     {
-        hunger.Subtract(hunger.passiveValue * Time.deltaTime);
-        stamina.Add(stamina.passiveValue * Time.deltaTime);
+        hunger.Subtract(hunger.passiveValue * Time.deltaTime);  // 일정 시간마다 배고픔 감소
+        stamina.Add(stamina.passiveValue * Time.deltaTime); // 일정 시간마다 스테미나 회복
 
         if (hunger.curValue <= 0f)
         {
-            health.Subtract(noHungerHealthDecay * Time.deltaTime);
+            health.Subtract(noHungerHealthDecay * Time.deltaTime);  // 배고픔이 0이될 시 체력감소
         }
 
-        if (health.curValue < 0f)
+        if (health.curValue < 0f)   // 체력이 0이될 시 사망처리
         {
             Die();
         }
@@ -54,9 +54,9 @@ public class PlayerCondition : MonoBehaviour
         Debug.Log("플레이어가 죽었다.");
     }
     
-    public bool UseStamina(float amount)
+    public bool UseStamina(float amount)    // 스테미나 사용 이벤트
     {
-        if(stamina.curValue - amount < 0)
+        if(stamina.curValue - amount < 0)   // 비용 체크
         {
             return false;
         }

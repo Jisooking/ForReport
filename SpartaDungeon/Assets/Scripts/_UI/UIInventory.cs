@@ -28,7 +28,7 @@ public class UIInventory : MonoBehaviour
     private PlayerController controller;
     private PlayerCondition condition;
 
-    void Start()
+    void Start()    //ui상태 초기화
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
@@ -51,7 +51,7 @@ public class UIInventory : MonoBehaviour
         ClearSelectedItemWindow();
     }
 
-		void ClearSelectedItemWindow()
+		void ClearSelectedItemWindow()  //선택아이템 상태 초기화
     {
         selectedItem = null;
 
@@ -66,7 +66,7 @@ public class UIInventory : MonoBehaviour
         dropButton.SetActive(false);
     }
 
-    public void Toggle()
+    public void Toggle()    //인벤토리 활성화/비활성화
     {
         if (IsOpen())
         {
@@ -82,14 +82,13 @@ public class UIInventory : MonoBehaviour
     {
         return inventoryWindow.activeInHierarchy;
     }
+    
 
-		// PlayerController 먼저 수정
-
-    public void AddItem()
+    public void AddItem()   //아이템 획득 처리
     {
         ItemData data = CharacterManager.Instance.Player.itemData;
 
-        if (data.canStack)
+        if (data.canStack)  //중첩 가능 여부 체크
         {
             ItemSlot slot = GetItemStack(data);
             if(slot != null)
@@ -103,7 +102,7 @@ public class UIInventory : MonoBehaviour
 
         ItemSlot emptySlot = GetEmptySlot();
 
-        if(emptySlot != null)
+        if(emptySlot != null)   // 아이템 창 가득찼을 때 예외처리
         {
             emptySlot.item = data;
             emptySlot.quantity = 1;
@@ -116,7 +115,7 @@ public class UIInventory : MonoBehaviour
         CharacterManager.Instance.Player.itemData = null;
     }
 
-    public void UpdateUI()
+    public void UpdateUI()  // 인벤토리 UI 업데이트
     {
         for(int i = 0; i < slots.Length; i++)
         {
@@ -131,7 +130,7 @@ public class UIInventory : MonoBehaviour
         }
     }
 
-    ItemSlot GetItemStack(ItemData data)
+    ItemSlot GetItemStack(ItemData data)    // 아이템 중첩갯수 표시
     {
         for(int i = 0; i < slots.Length; i++)
         {
@@ -143,7 +142,7 @@ public class UIInventory : MonoBehaviour
         return null;
     }
 
-    ItemSlot GetEmptySlot()
+    ItemSlot GetEmptySlot() // 슬롯 비우기
     {
         for(int i = 0; i < slots.Length; i++)
         {
@@ -155,13 +154,13 @@ public class UIInventory : MonoBehaviour
         return null;
     }
     
-		public void ThrowItem(ItemData data)
+		public void ThrowItem(ItemData data)    //아이템 버리기
     {
-        Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
+        Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));    // 범위내의 랜덤한 위치로 떨어뜨림
     }
 
         
-    public void SelectItem(int index)
+    public void SelectItem(int index)   //선택 아이템 정보 표시
     {
         if (slots[index].item == null) return;
 
@@ -186,9 +185,9 @@ public class UIInventory : MonoBehaviour
         dropButton.SetActive(true);
     }
 
-    public void OnUseButton()
+    public void OnUseButton()   //사용하기 버튼
     {
-        if(selectedItem.item.type == ItemType.Consumable)
+        if(selectedItem.item.type == ItemType.Consumable)   // 사용가능한 아이템일 때만
         {
             for(int i = 0; i < selectedItem.item.consumables.Length; i++)
             {
@@ -202,11 +201,11 @@ public class UIInventory : MonoBehaviour
                         controller.BoostSpeed(selectedItem.item.consumables[i].value, 2f); break;
                 }
             }
-            RemoveSelctedItem();
+            RemoveSelctedItem();    //사용 후 제거처리
         }
     }
 
-    public void OnDropButton()
+    public void OnDropButton()  //아이템 버리기 버튼
     {
         ThrowItem(selectedItem.item);
         RemoveSelctedItem();
@@ -216,7 +215,7 @@ public class UIInventory : MonoBehaviour
     {
         slots[selectedItemIndex].quantity--;
 
-        if (slots[selectedItemIndex].quantity <= 0)
+        if (slots[selectedItemIndex].quantity <= 0) // 0개가 되었을때 슬롯 비우기
         {
             selectedItem.item = null;
             selectedItemIndex = -1;     
@@ -231,7 +230,7 @@ public class UIInventory : MonoBehaviour
         return false;
     }
     
-    public void OnEquipButton()
+    public void OnEquipButton() // 아이템 장착 버튼
     {
         if (slots[curEquipIndex].equipped)
         {
@@ -246,7 +245,7 @@ public class UIInventory : MonoBehaviour
         SelectItem(selectedItemIndex);
     }
 
-    void UnEquip(int index)
+    void UnEquip(int index) //장착 해제
     {
         slots[index].equipped = false;
         CharacterManager.Instance.Player.equip.UnEquip();
@@ -258,7 +257,7 @@ public class UIInventory : MonoBehaviour
         }
     }
     
-    public void OnUnEquipButton()
+    public void OnUnEquipButton() //장착 해제 버튼
     {
         UnEquip(selectedItemIndex);
     }

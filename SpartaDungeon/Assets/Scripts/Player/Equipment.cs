@@ -16,13 +16,13 @@ public class Equipment : MonoBehaviour
         condition = CharacterManager.Instance.Player.condition;
     }
 
-    public void EquipNew(ItemData data)
+    public void EquipNew(ItemData data) // 플레이어 아이템 장착 처리
     {
         UnEquip();
         curEquip = Instantiate(data.equipPrefab, equipParent).GetComponent<Equip>();
     }
 
-    public void UnEquip()
+    public void UnEquip() // 플레이어 아이템 장착 해제 처리
     {
         if(curEquip != null)
         {
@@ -31,11 +31,11 @@ public class Equipment : MonoBehaviour
         }
     }
     
-    public void OnAttackInput(InputAction.CallbackContext context)
+    public void OnAttackInput(InputAction.CallbackContext context)  // 공격 키 입력시 발생되는 함수
     {
         if(context.phase == InputActionPhase.Performed && curEquip != null && controller.canLook) 
         {
-            curEquip.OnAttackInput();
+            curEquip.OnAttackInput();   // 무기별로 OnAttackInput 출력
         }
     }
 }

@@ -23,14 +23,14 @@ public class ItemSlot : MonoBehaviour
 
     private void OnEnable()
     {
-        outline.enabled = equipped;
+        outline.enabled = equipped; //장착 여부 체크
     }
 
-    public void Set()
+    public void Set()   //인벤토리에 아이템 셋팅
     {
         icon.gameObject.SetActive(true);
         icon.sprite = item.icon;
-        quantityText.text = quantity > 1 ? quantity.ToString() : string.Empty;
+        quantityText.text = quantity > 1 ? quantity.ToString() : string.Empty;  //수량 체크
 
         if(outline != null)
         {
@@ -38,7 +38,7 @@ public class ItemSlot : MonoBehaviour
         }
     }
 
-    public void Clear()
+    public void Clear() //아이템 슬롯 초기화
     {
         item = null;
         icon.gameObject.SetActive(false);

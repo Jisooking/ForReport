@@ -22,11 +22,11 @@ public class EquipTool : Equip
     [Header("Combat")] public bool doesDealDamage;
     public int damage;
 
-    public override void OnAttackInput()
+    public override void OnAttackInput()    //공격 키 입력
     {
-        if (!attacking)
+        if (!attacking) //중복 공격 불가능 설정
         {
-            if (CharacterManager.Instance.Player.condition.UseStamina(useStamina))
+            if (CharacterManager.Instance.Player.condition.UseStamina(useStamina))  //스테미나 체크
             {
                 attacking = true;
                 animator.SetTrigger("Attack");
@@ -40,14 +40,14 @@ public class EquipTool : Equip
         attacking = false;
     }
 
-    public void OnHit()
+    public void OnHit() // 공격 적용 처리
     {
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, attackDistance))
         {
-            if (doesGatherResources && hit.collider.TryGetComponent(out Resource resource))
+            if (doesGatherResources && hit.collider.TryGetComponent(out Resource resource)) // 자원채집 가능시 채집
             {
                 resource.Gather(hit.point, hit.normal);
             }

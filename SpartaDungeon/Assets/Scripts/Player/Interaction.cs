@@ -19,23 +19,22 @@ public class Interaction : MonoBehaviour
     {
         camera = Camera.main;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if(Time.time - lastCheckTime > checkRate)
+        if(Time.time - lastCheckTime > checkRate)   // 일정 주기 마다 체크
         {
             lastCheckTime = Time.time;
 
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));    // 화면 중심에서 레이 발사
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
+            if(Physics.Raycast(ray, out hit, maxCheckDistance, layerMask)) // 상호 작용 가능 여부 체크
             {
                 if(hit.collider.gameObject != curInteractGameObject)
                 {
                     curInteractGameObject = hit.collider.gameObject;
-                    curInteractable = hit.collider.GetComponent<IInteractable>();
+                    curInteractable = hit.collider.GetComponent<IInteractable>();   // 상호 작용 가능 시 정보 및 키 입력 가능
                     SetPromptText();
                 }
             }
@@ -48,19 +47,19 @@ public class Interaction : MonoBehaviour
         }
     }
 
-    private void SetPromptText()
+    private void SetPromptText()    // 정보 텍스트 활성화
     {
         promptText.gameObject.SetActive(true);
         promptText.text = curInteractable.GetInteractPrompt();
     }
 
-    public void OnInteractInput(InputAction.CallbackContext context)
+    public void OnInteractInput(InputAction.CallbackContext context)    // 상호 작용 키 입력시
     {
         if(context.phase == InputActionPhase.Started && curInteractable != null)
         {
-            if (curInteractGameObject.layer == LayerMask.NameToLayer("Interactable"))
+            if (curInteractGameObject.layer == LayerMask.NameToLayer("Interactable"))   // 가능 여부체크
             {
-                curInteractable.OnInteract();
+                curInteractable.OnInteract();   // 상호 작용 발생
             }
             curInteractGameObject = null;
             curInteractable = null;
