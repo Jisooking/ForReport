@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44c7d73c2b09fc3499e86170534d181b, type: 3}
-  m_Name: Item_Carrot
+  m_Name: Item_Flower
   m_EditorClassIdentifier: 
-  displayName: "\uB2F9\uADFC"
-  description: "\uC601\uC591\uB9CC\uC810"
+  displayName: "\uAF43"
+  description: "\uC608\uBFCC\uB2E4"
   type: 2
-  icon: {fileID: 21300000, guid: b53822ec75d701e49b9947d1d09fd81e, type: 3}
-  dropPrefab: {fileID: 3020984713959636984, guid: 7928c541c0869984790dfab2db4cf290, type: 3}
+  icon: {fileID: 21300000, guid: d4b87fa4adc3b064189e130e9f3cd6ab, type: 3}
+  dropPrefab: {fileID: 4414827902157607432, guid: ab8cb97c2709d2c4ab9f246ddde95e76, type: 3}
   canStack: 1
   maxStackAmount: 12
   consumables:
-  - type: 0
-    value: 20
-  - type: 1
-    value: 30
+  - type: 2
+    value: 25
   equipPrefab: {fileID: 0}

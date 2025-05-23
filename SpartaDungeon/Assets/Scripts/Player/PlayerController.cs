@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -126,5 +128,19 @@ public class PlayerController : MonoBehaviour
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+    
+    public void BoostSpeed(float amount, float duration)
+    {
+        StartCoroutine(SpeedBoostCoroutine(amount, duration));
+    }
+    
+    private IEnumerator SpeedBoostCoroutine(float amount, float duration)
+    {
+        moveSpeed += amount;
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed -= amount;
     }
 }
